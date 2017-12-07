@@ -12,6 +12,7 @@ import java.util.Collections;
  * Given "bbbbb", the answer is "b", with the length of 1.
  * Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
  * 求一个字符串的最长的无重复子字符串
+ 总体思路是：声明一个arrayList来存放最长的字符串，每准备新加一个字符，就和之前的list中的字符比较，如果都不一致那么就加入。并记录每次list的长度，最后拿最长的即可。
  * @author zhangzhihua
  * @date 2017/12/6 17:57
  */
