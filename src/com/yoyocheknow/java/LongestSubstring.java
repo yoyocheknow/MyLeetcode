@@ -33,33 +33,22 @@ public class LongestSubstring {
             {
                 break;
             }
-            System.out.println("list[i循环中]="+list.toString());
-            System.out.println("list.add(param[i])="+param[i]);
             array.add(list.size());
             out:
             for(int j=i+1;j<param.length;j++)
             {
-                System.out.println("要加入list的字符="+param[j]);
                 for(int k=0;k<list.size();k++)//判断下一个字符是否有与list中一致的，一致则跳出循环，记录长度、存档
                 {
-                    System.out.println("list[j循环中]="+list.toString()+",k="+k);
                     if(param[j]==list.get(k))
                     {
                         array.add(list.size());
-
-                        System.out.println("list.get(k)="+list.get(k));
-                        System.out.println("param[j]="+param[j]);
-                        System.out.println("list.size()="+list.size());
                         list.clear();
-                        System.out.println("list被清空"+list.toString());
                         break out;//下一个字符和list中有一致的，记录这次的list长度，跳出循环，从第i+1个再开始
 
                     }else{
                         if(k==(list.size()-1))//这么设置的目的是要加入的字符和list中比对一遍后没有一个和list中一致的，那么就在list中添加这个字符，并跳出这个循环
                         {
-                            System.out.println("list.add(param[j]),param[j]="+param[j]);
                             list.add(param[j]);//如果下一个字符与list中没有一致的，则存入list中，然后继续往下面进行
-
                             break;
                         }
                     }
@@ -67,9 +56,7 @@ public class LongestSubstring {
                 array.add(list.size());
             }
         }
-        System.out.println("array="+array.toString());
         Collections.sort(array);
-        System.out.println("array排序后："+array.toString());
         if(array.size()<1)
         {
             return 0;
