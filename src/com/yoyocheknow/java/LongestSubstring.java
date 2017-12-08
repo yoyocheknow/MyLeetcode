@@ -106,9 +106,30 @@ public class LongestSubstring {
         return true;
 
     }
+    //第三种解决方法，时间复杂度为O1，思想是用一个滑动窗口来实现，用hashset来当作窗口，每向后移动一位，就判断窗口hashset里面有没有，没有的话
+    //向后延展，如果有重复字符，那么窗口第一位向前移动一位，知道窗口hashset里面没有重复字符。
+    public static int lengthOfLongestSubstring2(String s)
+    {
+        HashSet<Character> set = new HashSet<>();
+        int i=0,j=0,max=0;
+        int n=s.length();
+        while (i<n&&j<n)
+        {
+            if(!set.contains(s.charAt(j)))
+            {
+                set.add(s.charAt(j++));
+                max=Math.max(max,j-i);
+            }
+            else{
+                set.remove(s.charAt(i++));
+            }
+
+        }
+        return max;
+    }
     public static void main(String arg[])
     {
-        int len = lengthOfLongestSubstring1("d");
+        int len = lengthOfLongestSubstring2("abcbabcbb");
         System.out.println("len="+len);
     }
 }
