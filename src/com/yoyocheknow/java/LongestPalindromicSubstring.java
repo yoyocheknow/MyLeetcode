@@ -65,9 +65,43 @@ public class LongestPalindromicSubstring {
         }
         return isPalindromic(low+1,high-1,s,length-2);
     }
+
+//方法二
+    public static String longestPalindrome2(String s) {
+        // int low =0;
+        int length=s.length();
+        for(int size =length;size>0;size--)
+        {
+            for(int low=0,high=low+size-1;high<length;low++,high++)
+            {
+                if(isPalindromic2(s,low,high))
+                {
+                   return s.substring(low,high+1);
+                }
+            }
+        }
+
+        return s.substring(0,1);
+    }
+
+    public static boolean isPalindromic2(String s,int low,int high)
+    {
+        while (low<=high)
+        {
+            if(s.charAt(low)==s.charAt(high))
+            {
+                low++;
+                high--;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
     public static void main(String args[])
     {
-        String s =longestPalindrome("abaabb");
+        String s =longestPalindrome2("abcaabb");
         System.out.println("s="+s);
     }
 }
