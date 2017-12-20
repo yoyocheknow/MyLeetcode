@@ -66,7 +66,9 @@ public class LongestPalindromicSubstring {
         return isPalindromic(low+1,high-1,s,length-2);
     }
 
-//方法二
+//方法二，是对方法一循环查找的优化 ：1、从最长的子串开始遍历，一旦找到一个回文，就终止迭代。
+//                                 2、判断回文采用收缩法。从最长的串开始，遍历到每一个单独的字符。
+// 假设字符串长度为n,第一次判断长度为n的字符串是否是回文，是则返回，不是则进行下次循环找字符串中所有长度为n-1的字符串是否是回文。
     public static String longestPalindrome2(String s) {
         // int low =0;
         int length=s.length();
@@ -99,9 +101,46 @@ public class LongestPalindromicSubstring {
         }
         return true;
     }
+
+    //方法三，从字符中心遍历.
+    //回文就是中心对称的单词.从字符的中心开始，向两边扩散检查回文。这需要维护一个指针，从头开始，以每一个位置为中心遍历一遍。
+    //这比暴力遍历所有子串省了很多重复判断。以某个字符为核心一旦探测到边界，更长的的串就都不再考虑。复杂度O(n^2)。
+    // 注意，回文需要同时检查单核`aba`以及双核`abba`的情况。
+
+
+    static int  max=0;
+    static String rex = "";
+    public static String longestPalindrome3(String s) {
+        int length =s.length();
+        for(int i=0;i<length-1;i++)
+        {
+            isPalindromic3(s,i,i);
+            isPalindromic3(s,i,i+1);
+        }
+        return rex;
+    }
+
+    public static void isPalindromic3(String s,int low,int high)
+    {
+        while (low>=0&&high<s.length())
+        {
+            if(s.charAt(low)==s.charAt(high))
+            {
+                if(high-low+1>max)
+                {
+                    max=high-low+1;
+                    rex=s.substring(low,high+1);
+                }
+                low--;
+                high++;
+            }else
+                return;
+
+        }
+    }
     public static void main(String args[])
     {
-        String s =longestPalindrome2("abcaabb");
+        String s =longestPalindrome3("abcaabb");
         System.out.println("s="+s);
     }
 }
