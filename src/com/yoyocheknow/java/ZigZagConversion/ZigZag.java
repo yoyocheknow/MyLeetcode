@@ -47,8 +47,73 @@ public class ZigZag {
         }
         return ret;
     }
+
+    //方法二：
+   /* 这道题就是看坐标的变化。并且需要分块处理。
+
+    n=2时，字符串坐标变成zigzag的走法就是：
+
+            0 2 4 6
+
+            1 3 5 7
+
+    n=3时的走法是：
+
+            0     4     8
+
+            1  3  5  7  9
+
+            2     6    10
+
+    n=4时的走法是：
+
+            0       6        12
+
+            1    5  7     11 13
+
+            2  4    8  10    14
+
+            3       9        15
+
+      可以发现规律，每个V形字符串的长度永远是 2n-2 （0，1，2，3，4，5和6，7，8，9，10，11各自组成的V字形，也就是说
+      按行存储的话，第0行和第n-1行的间距一直是2n-2，比如n=4时0，6，12和3，9，15）。知道了首尾两行的计算规律那么现在计算中间
+      斜线数字的规律。比如 1，5，7，11，13之间是什么规律，2，4，8，10，14之间是什么规律。
+      可以看出，斜线之间的规律不仅关系的行n，还关系到列j。可以得出一下结论：
+      斜线上的数字=j+(2n-2)-2i;
+
+     按照上面的规律就可以写出代码了
+      */
+    public static String convert2(String s, int n) {
+        if(s==null||s.length()==0||n<=0)
+        {
+            return "";
+        }
+        if(n==1)
+        {
+            return s;
+        }
+
+        int size =2*n-2;
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i;j<s.length();j+=size)
+            {
+                sb.append(s.charAt(j));
+                if(i!=0&&i!=n-1)
+                {
+                    int temp=j+size-2*i;
+                    if(temp<s.length())
+                    {
+                        sb.append(s.charAt(temp));
+                    }
+                }
+            }
+        }
+        return sb.toString();
+    }
     public static void main(String args[])
     {
-        convert("0123456789",4);
+        convert2("0123456789",4);
     }
 }
