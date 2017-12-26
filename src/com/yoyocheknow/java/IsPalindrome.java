@@ -16,7 +16,8 @@ public class IsPalindrome {
         String s=String.valueOf(x);
         if(x<0)
         {
-           s=s.substring(1,s.length());
+            return false;
+           //s=s.substring(1,s.length());
         }
         System.out.print("s="+s);
 
