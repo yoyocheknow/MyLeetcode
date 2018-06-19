@@ -23,4 +23,20 @@ public class MaximumSubarray {
         }
         return max_res;
     }
+
+    public static int  maxSubArray2(int[] nums) {
+       if(nums.length==1)
+           return nums[0];
+       int sum = nums[0];
+       int max=sum;
+       for(int i=1;i<nums.length;i++)
+       {
+           sum=sum+nums[i];
+           if(sum<0)
+               sum=0;
+           if(max<sum)
+               max=sum;
+       }
+       return max;
+    }
 }
